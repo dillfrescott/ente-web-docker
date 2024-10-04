@@ -1,5 +1,7 @@
 FROM ubuntu:24.04 AS builder
 
+ENV NEXT_PUBLIC_ENTE_ACCOUNTS_URL=https://accounts.dill.moe
+
 ENV NEXT_PUBLIC_ENTE_FAMILY_URL=https://families.dill.moe
 
 ENV NEXT_PUBLIC_ENTE_ENDPOINT=https://photos.dill.moe
@@ -24,7 +26,7 @@ WORKDIR /ente/web
 
 RUN git submodule update --init --recursive
 
-RUN yarn install && npm run build
+RUN yarn install && npm run build && npm run build:accounts
 
 FROM ubuntu:24.04 AS main
 
@@ -36,6 +38,10 @@ RUN curl https://getcroc.schollz.com | bash
 
 COPY --from=builder /ente/web/apps/photos/out /web
 
+COPY --from=builder /ente/web/apps/accounts/out /accounts
+
 RUN tar -czvf /web.tgz /web
 
-ENTRYPOINT ["/bin/bash", "-c", "croc send /web.tgz"]
+RUN tar -czvf /accounts.tgz /accounts
+
+ENTRYPOINT ["/bin/bash", "-c", "croc send /web.tgz /accounts.tgz"]
