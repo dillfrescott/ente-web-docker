@@ -1,0 +1,6 @@
+services:
+  ente-web:
+    image: xdillfrescott/ente-web:latest
+    restart: always
+    ports:
+      - "3000:3000"
