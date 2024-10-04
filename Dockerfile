@@ -1,7 +1,5 @@
 FROM ubuntu:24.04
 
-ENV NEXT_PUBLIC_ENTE_ENDPOINT=https://photos.dill.moe
-
 RUN apt update && apt upgrade -y
 
 RUN apt install -y git curl sudo
@@ -22,4 +20,6 @@ RUN git submodule update --init --recursive
 
 RUN yarn install && npm run build
 
-ENTRYPOINT ["/bin/bash", "-c", "yarn dev"]
+COPY entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/bin/bash", "-c", "chmod +x /entrypoint.sh && /entrypoint.sh"]
