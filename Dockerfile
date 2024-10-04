@@ -1,5 +1,7 @@
 FROM ubuntu:24.04 AS builder
 
+ENV NEXT_PUBLIC_ENTE_FAMILY_URL=https://families.dill.moe
+
 ENV NEXT_PUBLIC_ENTE_ENDPOINT=https://photos.dill.moe
 
 ENV NEXT_PUBLIC_ENTE_ALBUMS_ENDPOINT=https://albums.dill.moe

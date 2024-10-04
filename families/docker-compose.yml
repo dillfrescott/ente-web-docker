@@ -4,3 +4,6 @@ services:
     restart: always
     ports:
       - "3003:3000"
+    environment:
+      - NEXT_WEB_ENTE_ENDPOINT=https://photos-web.dill.moe
+      - NEXT_PUBLIC_ENTE_ENDPOINT=https://photos.dill.moe
