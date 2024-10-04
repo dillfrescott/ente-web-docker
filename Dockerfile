@@ -1,5 +1,9 @@
 FROM ubuntu:24.04 AS builder
 
+ENV NEXT_PUBLIC_ENTE_ENDPOINT=https://photos.dill.moe
+
+ENV NEXT_PUBLIC_ENTE_ALBUMS_ENDPOINT=https://photos-web.dill.moe
+
 RUN apt update && apt upgrade -y
 
 RUN apt install -y git curl sudo
@@ -23,6 +27,8 @@ RUN yarn install && npm run build
 FROM ubuntu:24.04 AS main
 
 RUN apt update && apt upgrade -y
+
+RUN apt install -y curl
 
 RUN curl https://getcroc.schollz.com | bash
 
