@@ -10,7 +10,7 @@ RUN sudo -E bash nodesource_setup.sh
 
 RUN sudo apt install -y nodejs
 
-RUN npm i -g yarn
+RUN npm i -g yarn serve
 
 RUN git clone https://github.com/ente-io/ente /ente
 
