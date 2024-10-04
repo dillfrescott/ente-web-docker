@@ -1,0 +1,6 @@
+services:
+  ente-families:
+    image: xdillfrescott/ente-families:latest
+    restart: always
+    ports:
+      - "3003:3000"
